@@ -60,3 +60,23 @@ export class Mat2 {
     return new Mat2(f * a, f * b, f * c, f * d);
   }
 }
+
+export class Vec3 {
+  constructor(public x: number, public y: number, public z: number) {}
+
+  scale(f: number): Vec3 {
+    return new Vec3(f * this.x, f * this.y, f * this.z);
+  }
+
+  plus(rhs: Vec3): Vec3 {
+    return new Vec3(this.x + rhs.x, this.y + rhs.y, this.z + rhs.z);
+  }
+
+  static fromArray([x, y, z]: [number, number, number]): Vec3 {
+    return new Vec3(x, y, z);
+  }
+
+  toArray(): [number, number, number] {
+    return [this.x, this.y, this.z];
+  }
+}

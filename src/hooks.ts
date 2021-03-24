@@ -45,3 +45,41 @@ export function useMousePos({
 
   return ref;
 }
+
+export function useCanvasRenderingContext2D(
+  options?: CanvasRenderingContext2DSettings,
+): [CanvasRenderingContext2D | undefined, React.RefObject<HTMLCanvasElement>] {
+  const canvasRef: React.RefObject<HTMLCanvasElement> = React.useRef(null);
+  const [context, setContext] = React.useState<CanvasRenderingContext2D>();
+
+  React.useEffect(() => {
+    if (canvasRef.current !== null) {
+      setContext(
+        canvasRef.current.getContext('2d', options) as CanvasRenderingContext2D,
+      );
+    }
+  }, [options]);
+
+  return [context, canvasRef];
+}
+
+export function useReducer<St, A>(
+  reducer: React.Reducer<St, A>,
+  initState: St,
+  ...middlewares: Middleware<St, A>[]
+): [St, React.Dispatch<A>] {
+  let [state, dispatch] = React.useReducer(reducer, initState);
+
+  // Snarfed from the Redux guide
+  middlewares = [...middlewares];
+  middlewares.reverse();
+  middlewares.forEach(middleware => {
+    dispatch = middleware(state, dispatch);
+  });
+
+  return [state, dispatch];
+}
+
+export interface Middleware<St, A> {
+  (state: St, next: React.Dispatch<A>): React.Dispatch<A>;
+}

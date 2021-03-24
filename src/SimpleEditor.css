@@ -1,0 +1,48 @@
+.simple-editor {
+  overflow: auto;
+  background-color: #fafafa;
+  box-sizing: border-box;
+}
+
+.simple-editor.focused {
+  border: 1px solid var(--blue);
+}
+
+.simple-editor__scroller {
+  display: flex;
+  min-height: 100%;
+}
+
+.simple-editor__line-numbers {
+  height: 100%;
+  padding-top: 1px;
+  box-sizing: border-box;
+}
+
+.simple-editor__line-numbers div {
+  width: 100%;
+  text-align: right;
+  padding: 0 5px;
+  box-sizing: border-box;
+  color: #aaa;
+}
+
+.simple-editor textarea {
+  resize: none;
+  flex: 1 1 auto;
+  border: none;
+  outline: none;
+  padding-left: 5px;
+  background-color: unset;
+  white-space: pre;
+  overflow-x: auto;
+  overflow-y: hidden;
+  color: #444;
+}
+
+.simple-editor__line-numbers div,
+.simple-editor textarea {
+  font-size: 16px;
+  line-height: 1.5;
+  font-family: 'Fira Mono';
+}
